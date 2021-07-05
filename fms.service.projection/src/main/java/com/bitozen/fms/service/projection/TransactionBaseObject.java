@@ -19,8 +19,8 @@ import com.bitozen.fms.service.common.util.ZonedDateTimeAttributeConverter;
  */
 @Entity
 @Inheritance
-@DiscriminatorColumn(name = "employee_obj_disc", length = 50)
-@Table(name = "trx_sample")
+@DiscriminatorColumn(name = "sample_obj_disc", length = 50)
+@Table(name = "mst_sampleentryprojection")
 public abstract class TransactionBaseObject implements Serializable {
     
     @Id

@@ -6,20 +6,20 @@ import java.time.ZonedDateTime;
 import javax.persistence.Entity;
 
 @Entity
-public class Sample extends TransactionBaseObject implements Serializable {
+public class SampleEntryProjection extends TransactionBaseObject implements Serializable {
 
 	private String sampleID;
 	
-	public Sample() {
+	public SampleEntryProjection() {
 		
 	}
 
-	public Sample(String sampleID) {
+	public SampleEntryProjection(String sampleID) {
 		super();
 		this.sampleID = sampleID;
 	}
 
-	public Sample(String sampleID, String createdBy, ZonedDateTime createdDate, String updatedBy, ZonedDateTime updatedDate,
+	public SampleEntryProjection(String sampleID, String createdBy, ZonedDateTime createdDate, String updatedBy, ZonedDateTime updatedDate,
 			String recordID) {
 		super(createdBy, createdDate, updatedBy, updatedDate, recordID);
 		this.sampleID = sampleID;
