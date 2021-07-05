@@ -33,10 +33,10 @@ import org.springframework.web.client.RestTemplate;
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableCaching
-public class TrxQueryApplication {
+public class ServiceQueryApplication {
     
     public static void main(String[] args) {
-        SpringApplication.run(TrxQueryApplication.class, args);
+        SpringApplication.run(ServiceQueryApplication.class, args);
     }
 
     @Bean
