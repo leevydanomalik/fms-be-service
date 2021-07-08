@@ -1,6 +1,6 @@
 package com.bitozen.fms.service.common;
 
-import com.bitozen.fms.bizpar.dto.BizparOptimizeDTO;
+import com.bitozen.fms.common.dto.share.BizparOptimizeDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.UUID;

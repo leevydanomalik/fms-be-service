@@ -6,8 +6,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.bitozen.fms.bizpar.dto.BizparOptimizeDTO;
 import com.bitozen.fms.common.dto.GenericResponseDTO;
+import com.bitozen.fms.common.dto.share.BizparOptimizeDTO;
 import com.bitozen.fms.common.status.ResponseStatus;
 import com.bitozen.fms.service.common.util.RequestUtil;
 import com.bitozen.fms.service.common.util.RestClientUtil;
