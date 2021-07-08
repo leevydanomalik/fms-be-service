@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  *
  * @author bitozen
  */
-@Component("empRequestUtil")
+@Component("serviceRequestUtil")
 @PropertySource("classpath:fms.service.token.properties")
 public class RequestUtil {
 

@@ -49,12 +49,12 @@
             <version>${project.version}</version>
             <type>pom</type>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>fms.security.token.service</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>fms.db.pom</artifactId>

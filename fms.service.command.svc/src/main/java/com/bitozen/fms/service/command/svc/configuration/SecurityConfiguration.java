@@ -1,7 +1,7 @@
 package com.bitozen.fms.service.command.svc.configuration;
 
-//import com.bitozen.fms.security.token.service.filter.JwtAuthFilter;
-//import com.bitozen.fms.security.token.service.filter.JwtAuthLoginFilter;
+import com.bitozen.fms.security.token.service.filter.JwtAuthFilter;
+import com.bitozen.fms.security.token.service.filter.JwtAuthLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -51,10 +51,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
-                .anyRequest().permitAll();
-//                .and()
-//                .addFilterBefore(new JwtAuthLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(new JwtAuthLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
