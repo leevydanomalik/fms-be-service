@@ -1,6 +1,6 @@
 package com.bitozen.fms.service.command;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import lombok.Value;
 

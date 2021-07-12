@@ -77,26 +77,27 @@ public class ServiceHystrixCommandService {
                     dto.getUpdatedDate()== null ? new Date() : dto.getUpdatedDate(),
                     dto.getRecordID()
         			);
-        	commandGateway.send(command, new CommandCallback() {
-                public void onSuccess(CommandMessage cm, CommandResultMessage crm) {
-                    try {
-                        log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
-                                ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
-                                new GenericResponseDTO().successResponse().getMessage())));
-                    } catch (JsonProcessingException ex) {
-                        log.info(ex.getMessage());
-                    }
-                }
-
-                public void onFailure(CommandMessage cm, Throwable thrwbl) {
-                    response.setStatus(ResponseStatus.F);
-                    response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
-                    response.setMessage(thrwbl.getLocalizedMessage());
-                    try {
-                        log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
-                                ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), thrwbl.getStackTrace())));
-                    } catch (JsonProcessingException ex) {
-                        log.info(ex.getMessage());
+        	commandGateway.send(command, new CommandCallback<ServiceCreateCommand, Object>() {
+        		@Override
+                public void onResult(CommandMessage<? extends ServiceCreateCommand> commandMessage, CommandResultMessage<?> commandResultMessage) {
+                    if(commandResultMessage.isExceptional() == false){
+                        try {
+                            log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
+                                    ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
+                                    new GenericResponseDTO().successResponse().getMessage())));
+                        } catch (JsonProcessingException ex) {
+                            log.info(ex.getMessage());
+                        }
+                    } else {
+                        response.setStatus(ResponseStatus.F);
+                        response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                        response.setMessage(commandResultMessage.exceptionResult().getLocalizedMessage());
+                        try {
+                            log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
+                                    ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), commandResultMessage.exceptionResult().getStackTrace())));
+                        } catch (JsonProcessingException ex) {
+                            log.info(ex.getMessage());
+                        }
                     }
                 }
             });
@@ -133,29 +134,30 @@ public class ServiceHystrixCommandService {
 	                dto.getUpdatedBy(),
 	                dto.getUpdatedDate()== null ? new Date() : dto.getUpdatedDate()
 	    			);
-	    	commandGateway.send(command, new CommandCallback() {
-	            public void onSuccess(CommandMessage cm, CommandResultMessage crm) {
-	                try {
-	                    log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
-	                            ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
-	                            new GenericResponseDTO().successResponse().getMessage())));
-	                } catch (JsonProcessingException ex) {
-	                    log.info(ex.getMessage());
-	                }
-	            }
-	
-	            public void onFailure(CommandMessage cm, Throwable thrwbl) {
-	                response.setStatus(ResponseStatus.F);
-	                response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
-	                response.setMessage(thrwbl.getLocalizedMessage());
-	                try {
-	                    log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
-	                            ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), thrwbl.getStackTrace())));
-	                } catch (JsonProcessingException ex) {
-	                    log.info(ex.getMessage());
-	                }
-	            }
-	        });
+	    	commandGateway.send(command, new CommandCallback<ServiceChangeCommand, Object>() {
+        		@Override
+                public void onResult(CommandMessage<? extends ServiceChangeCommand> commandMessage, CommandResultMessage<?> commandResultMessage) {
+                    if(commandResultMessage.isExceptional() == false){
+                        try {
+                            log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
+                                    ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
+                                    new GenericResponseDTO().successResponse().getMessage())));
+                        } catch (JsonProcessingException ex) {
+                            log.info(ex.getMessage());
+                        }
+                    } else {
+                        response.setStatus(ResponseStatus.F);
+                        response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                        response.setMessage(commandResultMessage.exceptionResult().getLocalizedMessage());
+                        try {
+                            log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
+                                    ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), commandResultMessage.exceptionResult().getStackTrace())));
+                        } catch (JsonProcessingException ex) {
+                            log.info(ex.getMessage());
+                        }
+                    }
+                }
+            });
     	} catch(Exception e) {
     		e.getMessage();
     	}
@@ -181,26 +183,27 @@ public class ServiceHystrixCommandService {
     			dto.getSvcID(),
                 dto.getUpdatedBy()
     			);
-    	commandGateway.send(command, new CommandCallback() {
-            public void onSuccess(CommandMessage cm, CommandResultMessage crm) {
-                try {
-                    log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
-                            ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
-                            new GenericResponseDTO().successResponse().getMessage())));
-                } catch (JsonProcessingException ex) {
-                    log.info(ex.getMessage());
-                }
-            }
-
-            public void onFailure(CommandMessage cm, Throwable thrwbl) {
-                response.setStatus(ResponseStatus.F);
-                response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
-                response.setMessage(thrwbl.getLocalizedMessage());
-                try {
-                    log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
-                            ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), thrwbl.getStackTrace())));
-                } catch (JsonProcessingException ex) {
-                    log.info(ex.getMessage());
+    	commandGateway.send(command, new CommandCallback<ServiceDeleteCommand, Object>() {
+    		@Override
+            public void onResult(CommandMessage<? extends ServiceDeleteCommand> commandMessage, CommandResultMessage<?> commandResultMessage) {
+                if(commandResultMessage.isExceptional() == false){
+                    try {
+                        log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
+                                ProjectType.CQRS, "Service", new Date(), "Command", new GenericResponseDTO().successResponse().getCode(),
+                                new GenericResponseDTO().successResponse().getMessage())));
+                    } catch (JsonProcessingException ex) {
+                        log.info(ex.getMessage());
+                    }
+                } else {
+                    response.setStatus(ResponseStatus.F);
+                    response.setCode(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                    response.setMessage(commandResultMessage.exceptionResult().getLocalizedMessage());
+                    try {
+                        log.info(objectMapper.writeValueAsString(LogOpsUtil.getErrorResponse(
+                                ProjectType.CQRS, "Service", new Date(), "Command", response.getCode(), commandResultMessage.exceptionResult().getStackTrace())));
+                    } catch (JsonProcessingException ex) {
+                        log.info(ex.getMessage());
+                    }
                 }
             }
         });

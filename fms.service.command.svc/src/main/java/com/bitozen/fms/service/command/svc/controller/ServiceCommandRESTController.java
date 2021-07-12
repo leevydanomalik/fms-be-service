@@ -44,7 +44,7 @@ public class ServiceCommandRESTController {
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public @ResponseBody
     String getVersion() {
-        return "Purchase Requisition Command Service - version 1.0.0-SNAPSHOT";
+        return "Service Command Service - version 1.0.0-SNAPSHOT";
     }
     
     @RequestMapping(value = "/command/get.service.dummy", method = RequestMethod.GET)

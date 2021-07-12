@@ -2,7 +2,7 @@ package com.bitozen.fms.service.command;
 
 import java.util.Date;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import lombok.Value;
 

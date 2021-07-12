@@ -3,8 +3,9 @@ package com.bitozen.fms.service.core;
 import java.util.Date;
 
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.modelling.command.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import com.bitozen.fms.service.command.ServiceChangeCommand;
@@ -13,8 +14,6 @@ import com.bitozen.fms.service.command.ServiceDeleteCommand;
 import com.bitozen.fms.service.event.ServiceChangeEvent;
 import com.bitozen.fms.service.event.ServiceCreateEvent;
 import com.bitozen.fms.service.event.ServiceDeleteEvent;
-
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +43,7 @@ public class Service {
     
     @CommandHandler
     public Service(ServiceCreateCommand command) {
-    	apply(new ServiceCreateEvent(
+    	AggregateLifecycle.apply(new ServiceCreateEvent(
     			command.getSvcID(),
                 command.getSvcName(),
                 command.getSvcDate(),
@@ -61,7 +60,7 @@ public class Service {
     
     @CommandHandler
     public void handle(ServiceChangeCommand command) {
-    	apply(new ServiceChangeEvent(
+    	AggregateLifecycle.apply(new ServiceChangeEvent(
     			command.getSvcID(),
                 command.getSvcName(),
                 command.getSvcDate(),
@@ -75,7 +74,7 @@ public class Service {
     
     @CommandHandler
     public void handle(ServiceDeleteCommand command) {
-    	apply(new ServiceDeleteEvent(
+    	AggregateLifecycle.apply(new ServiceDeleteEvent(
     			command.getSvcID(),
                 command.getUpdatedBy()
     			));

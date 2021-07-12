@@ -2,9 +2,14 @@ package com.bitozen.fms.service.event;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
-@Value
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class ServiceChangeEvent {
 
 	private String svcID;
