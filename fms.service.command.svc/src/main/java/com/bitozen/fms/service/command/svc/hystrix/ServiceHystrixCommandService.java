@@ -102,7 +102,7 @@ public class ServiceHystrixCommandService {
                 }
             });
     	} catch(Exception e) {
-    		e.getMessage();
+    		log.info(e.getMessage());
     	}
     	
         return response;
@@ -159,7 +159,7 @@ public class ServiceHystrixCommandService {
                 }
             });
     	} catch(Exception e) {
-    		e.getMessage();
+    		log.info(e.getMessage());
     	}
         return response;
     }

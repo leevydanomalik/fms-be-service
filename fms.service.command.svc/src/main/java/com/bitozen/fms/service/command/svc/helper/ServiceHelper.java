@@ -36,16 +36,20 @@ public class ServiceHelper {
     
     public BizparOptimizeDTO findBizparByKey(String bizparKey) {
         if (bizparKey != null && !bizparKey.trim().equalsIgnoreCase("") && !bizparKey.isEmpty()) {
-            ResponseEntity<GenericResponseDTO<BizparOptimizeDTO>> data = restClientUtil.restServiceExchange(
-                    BIZPAR_URL,
-                    BIZPAR_GET_OPTIMIZE_BY_KEY_URI,
-                    HttpMethod.GET,
-                    requestUtil.getPreFormattedRequestWithToken(),
-                    GenericResponseDTO.class,
-                    bizparKey);
-            if (data.getBody().getStatus().equals(ResponseStatus.S)) {
-                return objectMapper.convertValue(data.getBody().getData(), BizparOptimizeDTO.class);
-            }
+        	try{
+        		ResponseEntity<GenericResponseDTO<BizparOptimizeDTO>> data = restClientUtil.restServiceExchange(
+                        BIZPAR_URL,
+                        BIZPAR_GET_OPTIMIZE_BY_KEY_URI,
+                        HttpMethod.GET,
+                        requestUtil.getPreFormattedRequestWithToken(),
+                        GenericResponseDTO.class,
+                        bizparKey);
+                if (data.getBody().getStatus().equals(ResponseStatus.S)) {
+                    return objectMapper.convertValue(data.getBody().getData(), BizparOptimizeDTO.class);
+                }
+        	} catch(Exception e) {
+        		log.info(e.getMessage());
+        	}
         }
         return new BizparOptimizeDTO();
     } 
