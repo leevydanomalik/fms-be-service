@@ -52,8 +52,6 @@ public class Service {
                 command.getSvcWorkProgress(),
                 command.getCreatedBy(),
                 command.getCreatedDate(),
-                command.getUpdatedBy(),
-                command.getUpdatedDate(),
                 command.getRecordID()
     			));
     }
@@ -90,8 +88,6 @@ public class Service {
         this.svcWorkProgress = event.getSvcWorkProgress();
         this.createdBy = event.getCreatedBy();
         this.createdDate = event.getCreatedDate();
-        this.updatedBy = event.getUpdatedBy();
-        this.updatedDate = event.getUpdatedDate();
         this.recordID = event.getRecordID();
     }
     

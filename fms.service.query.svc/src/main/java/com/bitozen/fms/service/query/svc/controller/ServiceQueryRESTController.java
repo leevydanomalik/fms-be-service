@@ -25,7 +25,7 @@ import com.bitozen.fms.common.dto.GetListRequestDTO;
 import com.bitozen.fms.common.type.ProjectType;
 import com.bitozen.fms.common.util.LogOpsUtil;
 import com.bitozen.fms.service.common.dto.query.ServiceDTO;
-import com.bitozen.fms.service.query.svc.handler.ServiceByIDQuery;
+import com.bitozen.fms.service.query.svc.handler.query.ServiceByIDQuery;
 import com.bitozen.fms.service.query.svc.hystrix.ServiceHystrixQueryService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -71,26 +71,6 @@ public class ServiceQueryRESTController {
     	GenericResponseDTO<ServiceDTO> response = service.getServiceByID(svcID);
     	return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/query/get.service.by.id.new/{svcID}",
-		method = RequestMethod.GET,
-		produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<CompletableFuture<GenericResponseDTO>> getServiceByIDNew(@PathVariable("svcID") String svcID) {
-			try {
-				log.info(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(LogOpsUtil.getLogOps(ProjectType.CQRS, "Service", ServiceQueryRESTController.class.getName(),
-				httpRequest.getRequestURL().toString(),
-				new Date(), "Query", "getServiceByID",
-				"SYSTEM",
-				svcID)));
-			} catch (JsonProcessingException ex) {
-				log.info(ex.getMessage());
-			}
-		CompletableFuture<GenericResponseDTO> response = gateway.query(new ServiceByIDQuery(svcID), GenericResponseDTO.class);
-		return ResponseEntity.status(HttpStatus.OK).body(response);
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     
     @RequestMapping(value = "/query/get.service.all",
             method = RequestMethod.POST,

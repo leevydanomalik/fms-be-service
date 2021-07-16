@@ -3,6 +3,8 @@ package com.bitozen.fms.service.command.svc.hystrix;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.axonframework.commandhandling.CommandCallback;
 import org.axonframework.commandhandling.CommandMessage;
 import org.axonframework.commandhandling.CommandResultMessage;
@@ -61,7 +63,7 @@ public class ServiceHystrixCommandService {
                 @CacheEvict(value = "getServiceAllCache", allEntries = true)
             }
     )
-    public GenericResponseDTO<ServiceCreateCommandDTO> postService(ServiceCreateCommandDTO dto) {
+    public GenericResponseDTO<ServiceCreateCommandDTO> postService(@NotNull ServiceCreateCommandDTO dto) {
     	GenericResponseDTO<ServiceCreateCommandDTO> response = new GenericResponseDTO().successResponse();
     	try {
         	ServiceCreateCommand command = new ServiceCreateCommand(
@@ -73,8 +75,6 @@ public class ServiceHystrixCommandService {
         			objectMapper.writeValueAsString(new AggregateStatusDTO(helper.findBizparByKey(dto.getSvcWorkProgress().getLastKnownStatus()))),
         			dto.getCreatedBy() == null ? "SYSTEM" : dto.getCreatedBy(),
                     dto.getCreatedDate() == null ? new Date() : dto.getCreatedDate(),
-                    dto.getUpdatedBy(),
-                    dto.getUpdatedDate()== null ? new Date() : dto.getUpdatedDate(),
                     dto.getRecordID()
         			);
         	commandGateway.send(command, new CommandCallback<ServiceCreateCommand, Object>() {
@@ -121,7 +121,7 @@ public class ServiceHystrixCommandService {
                 @CacheEvict(value = "getServiceAllCache", allEntries = true)
             }
     )
-    public GenericResponseDTO<ServiceChangeCommandDTO> putService(ServiceChangeCommandDTO dto) {
+    public GenericResponseDTO<ServiceChangeCommandDTO> putService(@NotNull ServiceChangeCommandDTO dto) {
     	GenericResponseDTO<ServiceChangeCommandDTO> response = new GenericResponseDTO().successResponse();
     	try {
 	    	ServiceChangeCommand command = new ServiceChangeCommand(
@@ -177,11 +177,11 @@ public class ServiceHystrixCommandService {
                 @CacheEvict(value = "getServiceAllCache", allEntries = true)
             }
     )
-    public GenericResponseDTO<ServiceDeleteCommandDTO> deleteService(ServiceDeleteCommandDTO dto) {
+    public GenericResponseDTO<ServiceDeleteCommandDTO> deleteService(@NotNull ServiceDeleteCommandDTO dto) {
     	GenericResponseDTO<ServiceDeleteCommandDTO> response = new GenericResponseDTO().successResponse();
     	ServiceDeleteCommand command = new ServiceDeleteCommand(
     			dto.getSvcID(),
-                dto.getUpdatedBy()
+                dto.getUpdatedBy() == null ? "SYSTEM" : dto.getUpdatedBy()
     			);
     	commandGateway.send(command, new CommandCallback<ServiceDeleteCommand, Object>() {
     		@Override

@@ -1,4 +1,4 @@
-package com.bitozen.fms.service.query.svc.handler;
+package com.bitozen.fms.service.query.svc.handler.query;
 
 import lombok.Value;
 

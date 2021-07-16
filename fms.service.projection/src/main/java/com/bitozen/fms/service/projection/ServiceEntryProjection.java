@@ -1,42 +1,55 @@
 package com.bitozen.fms.service.projection;
 
-import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-public class ServiceEntryProjection extends ServiceTransactionBaseObject implements Serializable{
+import com.bitozen.fms.common.dto.AggregateStatusDTO;
+import com.bitozen.fms.common.dto.CreationalSpecificationDTO;
+import com.bitozen.fms.common.dto.GenericAccessTokenDTO;
+import com.bitozen.fms.service.common.MetadataDTO;
 
-	private String svcID;
-	private String svcName;
-	@Temporal(javax.persistence.TemporalType.DATE)
-	private Date svcDate;
-	@Type(type = "text")
-	private String svcMetadata;
-	@Type(type = "text")
-	private String svcToken;
-	@Type(type = "text")
-	private String svcWorkProgress;
-	
-	public ServiceEntryProjection() {
-		
-	}
+@Document(value = "services")
+public class ServiceEntryProjection {
 
-	public ServiceEntryProjection(String svcID, String svcName, Date svcDate, String svcMetadata, String svcToken,
-			String svcWorkProgress, String createdBy, ZonedDateTime createdDate, String updatedBy,
-			ZonedDateTime updatedDate, String recordID) {
-		super(createdBy, createdDate, updatedBy, updatedDate, recordID);
+	 @Id
+	 public Long id;
+	 public String svcID;
+	 public String svcName;
+	 public Date svcDate;
+	 private MetadataDTO svcMetadata;
+	 private GenericAccessTokenDTO svcToken;
+	 private AggregateStatusDTO svcWorkProgress;
+	 private CreationalSpecificationDTO creational;
+	 private String recordID;
+	 
+	 public ServiceEntryProjection() {
+		 
+	 }
+
+	public ServiceEntryProjection(@NotNull Long id, @NotNull String svcID, @NotNull String svcName, @NotNull Date svcDate, MetadataDTO svcMetadata,
+			GenericAccessTokenDTO svcToken, AggregateStatusDTO svcWorkProgress,
+			CreationalSpecificationDTO creational, String recordID) {
+		this.id = id;
 		this.svcID = svcID;
 		this.svcName = svcName;
 		this.svcDate = svcDate;
 		this.svcMetadata = svcMetadata;
 		this.svcToken = svcToken;
 		this.svcWorkProgress = svcWorkProgress;
+		this.creational = creational;
+		this.recordID = recordID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getSvcID() {
@@ -63,27 +76,43 @@ public class ServiceEntryProjection extends ServiceTransactionBaseObject impleme
 		this.svcDate = svcDate;
 	}
 
-	public String getSvcMetadata() {
+	public MetadataDTO getSvcMetadata() {
 		return svcMetadata;
 	}
 
-	public void setSvcMetadata(String svcMetadata) {
+	public void setSvcMetadata(MetadataDTO svcMetadata) {
 		this.svcMetadata = svcMetadata;
 	}
 
-	public String getSvcToken() {
+	public GenericAccessTokenDTO getSvcToken() {
 		return svcToken;
 	}
 
-	public void setSvcToken(String svcToken) {
+	public void setSvcToken(GenericAccessTokenDTO svcToken) {
 		this.svcToken = svcToken;
 	}
 
-	public String getSvcWorkProgress() {
+	public AggregateStatusDTO getSvcWorkProgress() {
 		return svcWorkProgress;
 	}
 
-	public void setSvcWorkProgress(String svcWorkProgress) {
+	public void setSvcWorkProgress(AggregateStatusDTO svcWorkProgress) {
 		this.svcWorkProgress = svcWorkProgress;
+	}
+
+	public CreationalSpecificationDTO getCreational() {
+		return creational;
+	}
+
+	public void setCreational(CreationalSpecificationDTO creational) {
+		this.creational = creational;
+	}
+
+	public String getRecordID() {
+		return recordID;
+	}
+
+	public void setRecordID(String recordID) {
+		this.recordID = recordID;
 	}
 }

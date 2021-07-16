@@ -29,13 +29,13 @@ public class ServiceDTOAssembler {
 					domain.getSvcID(),
 					domain.getSvcName(),
 					domain.getSvcDate(),
-					objectMapper.readValue(domain.getSvcMetadata(), MetadataDTO.class),
-					objectMapper.readValue(domain.getSvcToken(), GenericAccessTokenDTO.class),
-					objectMapper.readValue(domain.getSvcWorkProgress(), AggregateStatusDTO.class),
-					domain.getCreatedBy(),
-                    Date.from(domain.getCreatedDate().toInstant()),
-                    domain.getUpdatedBy(),
-                    domain.getUpdatedDate() != null ? Date.from(domain.getUpdatedDate().toInstant()) : null,
+					domain.getSvcMetadata(),
+					domain.getSvcToken(),
+					domain.getSvcWorkProgress(),
+					domain.getCreational() == null ? null : domain.getCreational().getCreatedBy(),
+                    domain.getCreational() == null ? null : domain.getCreational().getCreatedDate(),
+                    domain.getCreational() == null ? null : domain.getCreational().getModifiedBy(),
+                    domain.getCreational() == null ? null : domain.getCreational().getModifiedDate(),
                     domain.getRecordID()
 					);
 		} catch (Exception e) {
